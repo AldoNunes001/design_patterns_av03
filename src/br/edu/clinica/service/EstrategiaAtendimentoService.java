@@ -3,20 +3,42 @@ package br.edu.clinica.service;
 import br.edu.clinica.model.Paciente;
 
 public class EstrategiaAtendimentoService {
+    private EstrategiaAtendimento estrategia;
 
-    public void atenderPresencial(Paciente p){
-        // PADRÃO SUGERIDO: STRATEGY
-        // Ideia: interface EstrategiaAtendimento com implementações:
-        // Presencial, Telemedicina, Emergencia. Escolher em runtime.
-        // TODO alunos: criar a hierarquia de estratégias e um "Context".
-        System.out.println("[Service] Atendimento presencial: " + p.getNome());
+    public EstrategiaAtendimentoService() {
     }
 
-    public void atenderTelemedicina(Paciente p){
-        System.out.println("[Service] Telemedicina: " + p.getNome());
+    public EstrategiaAtendimentoService(EstrategiaAtendimento estrategia) {
+        this.estrategia = estrategia;
     }
 
-    public void atenderEmergencia(Paciente p){
-        System.out.println("[Service] Emergência: " + p.getNome());
+    public void setEstrategia(EstrategiaAtendimento estrategia) {
+        this.estrategia = estrategia;
+    }
+
+    public void executarAtendimento(Paciente paciente) {
+        if (estrategia != null) {
+            estrategia.atender(paciente);
+        }
+    }
+
+    public String getTipoEstrategia() {
+        return estrategia != null ? estrategia.getTipo() : null;
+    }
+
+    // Métodos de conveniência para manter compatibilidade
+    public void atenderPresencial(Paciente p) {
+        setEstrategia(new AtendimentoPresencial());
+        executarAtendimento(p);
+    }
+
+    public void atenderTelemedicina(Paciente p) {
+        setEstrategia(new AtendimentoTelemedicina());
+        executarAtendimento(p);
+    }
+
+    public void atenderEmergencia(Paciente p) {
+        setEstrategia(new AtendimentoEmergencia());
+        executarAtendimento(p);
     }
 }
