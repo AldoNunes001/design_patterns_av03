@@ -61,12 +61,29 @@ public class AtendimentoController {
         view.linha();
     }
 
+    // public void atendimentoComEstrategia(){
+    //     view.titulo("Strategy — Modos de Atendimento");
+    //     var p = new Paciente("Igor","555");
+    //     estrategiaService.atenderPresencial(p);
+    //     estrategiaService.atenderTelemedicina(p);
+    //     estrategiaService.atenderEmergencia(p);
+    //     view.linha();
+    // }
+
     public void atendimentoComEstrategia(){
         view.titulo("Strategy — Modos de Atendimento");
         var p = new Paciente("Igor","555");
-        estrategiaService.atenderPresencial(p);
-        estrategiaService.atenderTelemedicina(p);
-        estrategiaService.atenderEmergencia(p);
+        
+        // Usando o padrão Strategy corretamente
+        estrategiaService.setEstrategia(new AtendimentoPresencial());
+        estrategiaService.executarAtendimento(p);
+        
+        estrategiaService.setEstrategia(new AtendimentoTelemedicina());
+        estrategiaService.executarAtendimento(p);
+        
+        estrategiaService.setEstrategia(new AtendimentoEmergencia());
+        estrategiaService.executarAtendimento(p);
+        
         view.linha();
     }
 }

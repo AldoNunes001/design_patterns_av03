@@ -26,19 +26,19 @@ public class EstrategiaAtendimentoService {
         return estrategia != null ? estrategia.getTipo() : null;
     }
 
-    // Métodos de conveniência para manter compatibilidade
-    public void atenderPresencial(Paciente p) {
-        setEstrategia(new AtendimentoPresencial());
-        executarAtendimento(p);
-    }
+    // // Métodos de conveniência para manter compatibilidade
+    // public void atenderPresencial(Paciente p) {
+    //     setEstrategia(new AtendimentoPresencial());
+    //     executarAtendimento(p);
+    // }
 
-    public void atenderTelemedicina(Paciente p) {
-        setEstrategia(new AtendimentoTelemedicina());
-        executarAtendimento(p);
-    }
+    // public void atenderTelemedicina(Paciente p) {
+    //     setEstrategia(new AtendimentoTelemedicina());
+    //     executarAtendimento(p);
+    // }
 
-    public void atenderEmergencia(Paciente p) {
-        setEstrategia(new AtendimentoEmergencia());
-        executarAtendimento(p);
-    }
+    // public void atenderEmergencia(Paciente p) {
+    //     setEstrategia(new AtendimentoEmergencia());
+    //     executarAtendimento(p);
+    // }
 }
